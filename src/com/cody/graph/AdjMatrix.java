@@ -2,8 +2,13 @@ package com.cody.graph;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * 邻接矩阵表示的图
+ */
 
 public class AdjMatrix {
     // 节点的个数
@@ -74,9 +79,65 @@ public class AdjMatrix {
         }
     }
 
+    /**
+     * 判断两个顶点是否有边
+     */
+
+    public boolean hasEdge(int v, int w) {
+        // 临界条件判断
+        validateVertex(v);
+        validateVertex(w);
+        // 判断两个顶点是否有边
+        return adj[v][w] == 1;
+    }
+
+    /**
+     * 获取节点的个数
+     */
+    public int V() {
+        return V;
+    }
+
+    /**
+     * 获取边的个数
+     */
+    public int E() {
+        return E;
+    }
+
+    /**
+     * 获取节点的度
+     */
+    public int degree(int v) {
+        return adj(v).size();
+    }
+
+    /**
+     * 获取一个顶点的所有的边
+     */
+    public ArrayList<Integer> adj(int v) {
+        validateVertex(v);
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            if (adj[v][i] == 1) {
+                res.add(i);
+            }
+
+        }
+
+        return res;
+    }
+
 
     public static void main(String[] args) {
         AdjMatrix adjMatrix = new AdjMatrix("g.txt");
         System.out.print(adjMatrix);
+
+        adjMatrix.validateVertex(3);
+        System.out.println("边的个数: " + adjMatrix.E());
+        System.out.println("顶点的个数: " + adjMatrix.V());
+
+        int degree = adjMatrix.degree(2);
+        System.out.println("2号节点的度: " + degree);
     }
 }
