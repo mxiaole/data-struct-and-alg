@@ -1,4 +1,4 @@
-package com.cody.graph;
+package com.cody.datastruct.array.graph;
 
 import java.io.File;
 import java.io.IOException;
