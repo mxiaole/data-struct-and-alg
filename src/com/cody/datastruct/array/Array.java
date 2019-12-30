@@ -1,5 +1,6 @@
 package com.cody.datastruct.array;
 
+
 public class Array {
     private int[] data;
     private int size;
@@ -71,23 +72,90 @@ public class Array {
         size++;
     }
 
-    public void delete() {
 
+    // 获取指定索引的值
+    public int get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("index is illegal");
+        }
+        return data[index];
     }
 
-    public int search(int value) {
-
-        return 0;
+    // 更新数组元素
+    public void set(int index, int e) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("index is illegal");
+        }
+        data[index] = e;
     }
 
-    public void forEach() {
+    // 判断元素e是不是在数组中
+    public boolean contains(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    // 查找元素e的数组下标
+    public int find(int e) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] == e) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // 从数组中删除元素, 返回删除的元素值
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException();
+        }
+        int ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+
+        return ret;
+    }
+
+    // 从数组中删除指定的元素e, 只删除一个
+    public void removeElement(int e) {
+        int index = find(e);
+        if (index != -1) {
+            remove(index);
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Array size is : %d, capacity is : %d\n", size, getCapacity()));
+
+        res.append('[');
+        for (int i = 0; i < size; i++) {
+            res.append(data[i]);
+            if (i != size - 1) {
+                res.append(", ");
+            }
+        }
+
+        res.append("]");
+
+        return res.toString();
     }
 
     public static void main(String[] args) {
         /**
          * 使用java自带的数组
          */
+        /*
         int[] arr = new int[10];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = i;
@@ -101,10 +169,14 @@ public class Array {
         for (int score : scores) {
             System.out.println(score);
         }
+        */
         // 使用自定义的数组
-        Array array = new Array();
-        array.addLast(3);
+        Array array = new Array(10);
+        for (int i = 0; i < 10; i++) {
+            array.addLast(i);
+        }
 
+        System.out.println(array);
     }
 
 }
