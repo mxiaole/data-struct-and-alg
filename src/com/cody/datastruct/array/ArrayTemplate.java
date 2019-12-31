@@ -1,6 +1,5 @@
 package com.cody.datastruct.array;
 
-import java.sql.Struct;
 
 // 使用泛型实现
 public class ArrayTemplate<E> {
@@ -113,6 +112,10 @@ public class ArrayTemplate<E> {
         studentArrayTemplate.addFirst(student3);
 
         System.out.println(studentArrayTemplate);
+
+        ArrayTemplate<Integer> arrayTemplate = new ArrayTemplate<>();
+        arrayTemplate.addFirst(10);
+        System.out.println(arrayTemplate);
 
     }
 }
