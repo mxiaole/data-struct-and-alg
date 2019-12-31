@@ -1,6 +1,6 @@
 package com.cody.datastruct.array;
 
-import com.sun.crypto.provider.ARCFOURCipher;
+import java.sql.Struct;
 
 // 使用泛型实现
 public class ArrayTemplate<E> {
@@ -38,13 +38,41 @@ public class ArrayTemplate<E> {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("index must be non-negative");
         }
-        for (int i = size; i > index; i--) {
+        for (int i = size - 1; i >= index; i--) {
             data[i + 1] = data[i];
         }
 
         data[index] = e;
         size++;
     }
+
+    // 判断元素e是否在数组中
+    public boolean contains(E e) {
+        for (int i = 0; i < size; i++) {
+            if (e.equals(data[i])) {  // 对象值的比较
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // 删除指定索引的元素
+    public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("index is invalid");
+        }
+
+        E ret = data[index];
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        size--;
+        data[size] = null;  // 释放内存
+
+        return ret;
+    }
+
 
     @Override
     public String toString() {
@@ -53,16 +81,38 @@ public class ArrayTemplate<E> {
 
         result.append('[');
         for (int i = 0; i < size; i++) {
-            result.append(data[i]);
+            result.append(data[i] + ", ");
         }
         result.append(']');
         return result.toString();
     }
 
     public static void main(String[] args) {
-        ArrayTemplate<Integer> array = new ArrayTemplate<>();
-        array.addFirst(3);
+        class Student {
+            private String name;
+            private int score;
 
-        System.out.println(array);
+            public Student(String name, int score) {
+                this.name = name;
+                this.score = score;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("student name is : %s, score is : %d", this.name, this.score);
+            }
+        }
+
+        Student student1 = new Student("zhangsan", 89);
+        Student student2 = new Student("lisi", 90);
+        Student student3 = new Student("wangwu", 91);
+
+        ArrayTemplate<Student> studentArrayTemplate = new ArrayTemplate<>();
+        studentArrayTemplate.addFirst(student1);
+        studentArrayTemplate.addFirst(student2);
+        studentArrayTemplate.addFirst(student3);
+
+        System.out.println(studentArrayTemplate);
+
     }
 }
