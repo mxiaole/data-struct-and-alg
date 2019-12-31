@@ -40,6 +40,26 @@ public class DynamicArray<E> {
         size++;
     }
 
+    // 从数组中删除元素
+    public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("invalid index");
+        }
+        E ret = data[index];
+
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+        data[size] = null;
+        size--;
+
+        //  动态数组缩小容量
+        if (size == data.length / 2) {
+            resize(data.length / 2);
+        }
+        return ret;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -60,6 +80,8 @@ public class DynamicArray<E> {
         }
         System.out.println(array);
         array.add(0, 20);
+        System.out.println(array);
+        array.remove(0);
         System.out.println(array);
     }
 }
