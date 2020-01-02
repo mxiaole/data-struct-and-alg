@@ -16,6 +16,22 @@ public class DynamicArray<E> {
         this(10);
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int getCapacity() {
+        return data.length;
+    }
+
+    public void addLast(E e) {
+        add(size, e);
+    }
+
     // 动态数组的扩容
     private void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
@@ -58,6 +74,25 @@ public class DynamicArray<E> {
             resize(data.length / 2);
         }
         return ret;
+    }
+
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
+    public E get(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("invalide index");
+        }
+        return data[index];
+    }
+
+    public E getFirst() {
+        return get(0);
+    }
+
+    public E getLast() {
+        return get(size - 1);
     }
 
     @Override
