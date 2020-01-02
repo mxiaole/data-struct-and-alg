@@ -80,6 +80,10 @@ public class DynamicArray<E> {
         return remove(size - 1);
     }
 
+    public E removeFirst() {
+        return remove(0);
+    }
+
     public E get(int index) {
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("invalide index");
