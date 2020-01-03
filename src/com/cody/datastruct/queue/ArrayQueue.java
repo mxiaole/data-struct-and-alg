@@ -18,6 +18,11 @@ public class ArrayQueue<E> implements Queue<E> {
         array.addLast(e);
     }
 
+    /**
+     * 时间复杂度为O(n)
+     *
+     * @return
+     */
     @Override
     public E dequeue() {
         return array.removeFirst();
