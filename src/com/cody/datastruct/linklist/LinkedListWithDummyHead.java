@@ -60,6 +60,8 @@ public class LinkedListWithDummyHead<E> {
         Node node = new Node(e);
         node.next = pre.next;
         pre.next = node;
+
+        size++;
     }
 
     // 向链表头中添加元素
@@ -70,5 +72,99 @@ public class LinkedListWithDummyHead<E> {
     // 向链表的结尾添加元素
     public void addLast(E e) {
         add(size, e);
+    }
+
+    // 获取链表中index的元素
+    public E get(int index) {
+        // 判断index的合法性
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("invalide index");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur.e;
+    }
+
+    // 获取链表的第一个元素
+    public E getFirst() {
+        return get(0);
+    }
+
+    // 获取链表的最后一个元素
+    public E getLast() {
+        return get(size);
+    }
+
+    // 修改链表的第index元素
+    public void set(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("invalid index");
+        }
+        Node cur = dummyHead.next;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        cur.e = e;
+
+    }
+
+    // 查找链表中是否存在元素e
+    public boolean contains(E e) {
+        Node cur = dummyHead.next;
+        while (cur != null) {
+            if (cur.e.equals(e)) {
+                return true;
+            }
+            cur = cur.next;
+        }
+
+        return false;
+    }
+
+    // 从链表中删除元素
+    public E remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("invalid index");
+        }
+        Node pre = dummyHead;
+        for (int i = 0; i < index; i++) {
+            pre = pre.next;
+        }
+        Node delNode = pre.next;
+        pre.next = delNode.next;
+        delNode.next = null;
+        size--;
+
+        return delNode.e;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node cur = dummyHead.next;
+        while (cur != null) {
+            sb.append(cur + "->");
+            cur = cur.next;
+        }
+        sb.append("null");
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkedListWithDummyHead<Integer> linkedListWithDummyHead = new LinkedListWithDummyHead<>();
+        linkedListWithDummyHead.add(0, 1);
+        linkedListWithDummyHead.add(0, 2);
+        linkedListWithDummyHead.add(0, 3);
+
+        System.out.println(linkedListWithDummyHead);
+
+        linkedListWithDummyHead.add(2, 666);
+        System.out.println(linkedListWithDummyHead);
+        linkedListWithDummyHead.remove(2);
+        System.out.println(linkedListWithDummyHead);
+
     }
 }

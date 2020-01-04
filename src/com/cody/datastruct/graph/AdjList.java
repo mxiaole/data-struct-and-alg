@@ -1,4 +1,4 @@
-package com.cody.datastruct.array.graph;
+package com.cody.datastruct.graph;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -23,7 +23,8 @@ public class AdjList {
             Scanner scanner = new Scanner(file);
             // 读取图的顶点个数
             this.V = scanner.nextInt();
-            if (this.V < 0) throw new IllegalArgumentException("V must be non-negative");
+            if (this.V < 0)
+                throw new IllegalArgumentException("V must be non-negative");
             adj = new LinkedList[V];
             for (int i = 0; i < V; i++) {
                 adj[i] = new LinkedList<Integer>();
@@ -31,7 +32,8 @@ public class AdjList {
 
             // 读取图的边的个数
             this.E = scanner.nextInt();
-            if (this.E < 0) throw new IllegalArgumentException("E must be non-negative");
+            if (this.E < 0)
+                throw new IllegalArgumentException("E must be non-negative");
 
             // 创建邻接表
             for (int i = 0; i < E; i++) {

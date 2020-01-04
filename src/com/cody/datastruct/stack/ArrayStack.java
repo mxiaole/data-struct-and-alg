@@ -1,6 +1,5 @@
 package com.cody.datastruct.stack;
 
-import com.cody.datastruct.array.Array;
 import com.cody.datastruct.array.DynamicArray;
 
 public class ArrayStack<E> implements Stack<E> {

@@ -28,8 +28,8 @@ public class LinkedList<E> {
     }
 
     // 链表的成员变量
-    private Node head;  // 链表的头结点
-    private int size;  // 链表中元素的个数
+    private Node head; // 链表的头结点
+    private int size; // 链表中元素的个数
 
     // 链表的构造函数
     public LinkedList() {
@@ -82,9 +82,6 @@ public class LinkedList<E> {
             // pre.next = new Node(e, pre.next);
             size++;
         }
-
-        Node node = new Node(e);
-
     }
 
     // 向链表的末尾添加元素

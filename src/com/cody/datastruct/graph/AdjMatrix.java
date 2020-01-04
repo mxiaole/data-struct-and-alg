@@ -1,10 +1,9 @@
-package com.cody.datastruct.array.graph;
+package com.cody.datastruct.graph;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 /**
  * 邻接矩阵表示的图
@@ -127,7 +126,6 @@ public class AdjMatrix {
 
         return res;
     }
-
 
     public static void main(String[] args) {
         AdjMatrix adjMatrix = new AdjMatrix("g.txt");
