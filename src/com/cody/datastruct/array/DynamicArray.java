@@ -69,8 +69,8 @@ public class DynamicArray<E> {
         data[size] = null;
         size--;
 
-        //  动态数组缩小容量
-        if (size == data.length / 2) {
+        //  动态数组缩小容量, 为了防止复杂度的震荡，当容量小于四分之一的时候才进行缩容
+        if (size == data.length / 4) {
             resize(data.length / 2);
         }
         return ret;
@@ -86,7 +86,7 @@ public class DynamicArray<E> {
 
     public E get(int index) {
         if (index < 0 || index > size) {
-            throw new IllegalArgumentException("invalide index");
+            throw new IllegalArgumentException("invalid index");
         }
         return data[index];
     }

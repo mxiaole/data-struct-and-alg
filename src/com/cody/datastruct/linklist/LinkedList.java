@@ -88,4 +88,56 @@ public class LinkedList<E> {
     public void addLast(E e) {
         add(size, e);
     }
+
+    // 从链表中删除元素
+    public E remove(int index) {
+        // 如果要删除的元素是头结点
+        E ret;
+        if (index == 0) {
+            System.out.println(head);
+            ret = head.e;
+            head = head.next;
+        } else {
+            Node prev = head;
+            for (int i = 0; i < index; i++) {
+                prev = prev.next;
+            }
+            Node delNode = prev.next;
+            ret = delNode.e;
+            prev.next = delNode.next;
+            delNode.next = null;
+        }
+        size--;
+        return ret;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        while (head != null) {
+            stringBuilder.append(head.e + "->");
+            head = head.next;
+        }
+
+        stringBuilder.append("null");
+
+        return stringBuilder.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.addFirst(1);
+        linkedList.addFirst(2);
+        linkedList.addFirst(3);
+        linkedList.addFirst(4);
+        linkedList.addFirst(5);
+
+//        System.out.println(linkedList);
+
+
+        // 删除元素
+        linkedList.remove(2);
+        System.out.println(linkedList);
+    }
 }
+
