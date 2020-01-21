@@ -99,6 +99,15 @@ public class DynamicArray<E> {
         return get(size - 1);
     }
 
+    // 交换a、b两个元素
+    public void swap(int i, int j) {
+
+        E temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
