@@ -16,6 +16,13 @@ public class DynamicArray<E> {
         this(10);
     }
 
+    public DynamicArray(E[] arr) {
+        data = (E[]) new Object[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            data[i] = arr[i];
+        }
+    }
+
     public int getSize() {
         return size;
     }
@@ -56,6 +63,15 @@ public class DynamicArray<E> {
         size++;
     }
 
+    // 更新数组元素
+    public void set(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("index error");
+        }
+
+        data[index] = e;
+    }
+
     // 从数组中删除元素
     public E remove(int index) {
         if (index < 0 || index >= size) {
@@ -69,7 +85,7 @@ public class DynamicArray<E> {
         data[size] = null;
         size--;
 
-        //  动态数组缩小容量, 为了防止复杂度的震荡，当容量小于四分之一的时候才进行缩容
+        // 动态数组缩小容量, 为了防止复杂度的震荡，当容量小于四分之一的时候才进行缩容
         if (size == data.length / 4) {
             resize(data.length / 2);
         }

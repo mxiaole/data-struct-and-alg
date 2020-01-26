@@ -3,13 +3,8 @@ package com.cody.datastruct.heap;
 import com.cody.datastruct.array.DynamicArray;
 
 /**
- * 基于动态数组实现最大堆
- * 最大堆：
- * 1. 最大堆是一个完全二叉树
- * 2. 使用数组实现最大堆:
- * 假设一个节点在数组中对应的下标是i，
- * 那么这个节点的左孩子的下标为2*i, 右孩子在数组中的下标为2*i + 1
- * 父节点在数组中的下标是i/2
+ * 基于动态数组实现最大堆 最大堆： 1. 最大堆是一个完全二叉树 2. 使用数组实现最大堆: 假设一个节点在数组中对应的下标是i，
+ * 那么这个节点的左孩子的下标为2*i, 右孩子在数组中的下标为2*i + 1 父节点在数组中的下标是i/2
  */
 
 public class Heap<E extends Comparable<E>> {
@@ -20,6 +15,15 @@ public class Heap<E extends Comparable<E>> {
     // 1. 构造函数
     public Heap() {
         maxHeap = new DynamicArray<>();
+    }
+
+    // 将任意数组整理成堆heapify, 从第一个非叶子节点开始进行siftDown
+    public Heap(E[] arr) {
+        maxHeap = new DynamicArray<>(arr);
+        // 从第一个非叶子节点开始进行parent(array.length - 1)为第一个非叶子节点的索引
+        for (int i = parent(arr.length - 1); i >= 0; i--) {
+            siftDown(i);
+        }
     }
 
     // 2. 返回堆中的元素个数
@@ -33,7 +37,7 @@ public class Heap<E extends Comparable<E>> {
     }
 
     // 4. 堆的辅助私有方法
-    /*获取数组下标为i的节点的父节点数组下标*/
+    /* 获取数组下标为i的节点的父节点数组下标 */
     private int parent(int i) {
         if (i == 0) {
             throw new IllegalArgumentException("invalid index");
@@ -41,17 +45,17 @@ public class Heap<E extends Comparable<E>> {
         return (i - 1) / 2;
     }
 
-    /*获取数组下标为i的节点的左孩子数组下标*/
+    /* 获取数组下标为i的节点的左孩子数组下标 */
     private int left(int i) {
         return i * 2 + 1;
     }
 
-    /*获取数组下标为i的节点的右孩子数组下标*/
+    /* 获取数组下标为i的节点的右孩子数组下标 */
     private int right(int i) {
         return i * 2 + 2;
     }
 
-    // 5. 向堆中添加元素
+    // 5. 向堆中添加元素, 时间复杂度为nlogn, 相对于将一个数组整理成堆的时间复杂度为n
     public void add(E e) {
         // 在数组的末尾添加元素
         maxHeap.addLast(e);
@@ -91,12 +95,12 @@ public class Heap<E extends Comparable<E>> {
     private void siftDown(int k) {
         while (left(k) < maxHeap.getSize()) {
             // 查找k的左右孩子中的较大值
-            int l = left(k);  // 左孩子的索引
-            int r = l + 1;  // 右孩子的索引
+            int l = left(k); // 左孩子的索引
+            int r = l + 1; // 右孩子的索引
 
             // 如果有右孩子，并且右孩子的值比左孩子的值大
             if (r < maxHeap.getSize() && maxHeap.get(r).compareTo(maxHeap.get(l)) > 0) {
-                l = r;  // 此时l为左右孩子的最大值索引
+                l = r; // 此时l为左右孩子的最大值索引
             }
 
             // k索引的值和它的左右孩子中的最大值进行比较
@@ -110,4 +114,17 @@ public class Heap<E extends Comparable<E>> {
             k = l;
         }
     }
+
+    // 取出堆中最大的元素，并且替换成元素e
+    public E replace(E e) {
+        E ret = findMax();
+        maxHeap.set(0, e);
+        siftDown(0);
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("hello world");
+    }
+
 }
