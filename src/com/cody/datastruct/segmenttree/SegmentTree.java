@@ -107,6 +107,37 @@ class SegmentTree<E> {
         return merger.merge(leftResult, rightResult);
     }
 
+    // 更新index位置的元素
+    public void set(int index, E e) {
+        if (index < 0 || index > data.length) {
+            throw new IllegalArgumentException("invalid index");
+        }
+
+        data[index] = e; // 修改副本中的元素为e
+
+        // 修改线段树中的数值为e
+        set(0, 0, data.length - 1, index, e);
+    }
+
+    // 更新以treeIndex为根的线段树中更新index的值为e
+    private void set(int treeIndex, int l, int r, int index, E e) {
+        if (l == r) {
+            tree[treeIndex] = e;
+        }
+
+        int mid = l + (r - l) / 2;
+
+        int leftTreeIndex = leftChild(treeIndex);
+        int rightTreeIndex = rightChild(treeIndex);
+
+        if (index >= mid + 1)
+            set(rightTreeIndex, mid + 1, r, index, e);
+        else
+            set(leftTreeIndex, l, mid, index, e);
+
+        tree[treeIndex] = merger.merge(tree[leftTreeIndex], tree[rightTreeIndex]);
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
