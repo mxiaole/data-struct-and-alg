@@ -12,7 +12,7 @@ public class Trie<E> {
     // 定义字典树中的节点
     private class Node {
         public boolean isWord;  // 从根节点到该节点是不是一个单词
-        public TreeMap<Character, Node> next;  // 该节点的下一个节点的
+        public TreeMap<Character, Node> next;  // 该节点的中每个字符对应的下一个节点
 
         public Node(boolean isWord) {
             this.isWord = isWord;

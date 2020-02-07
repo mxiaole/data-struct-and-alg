@@ -178,7 +178,7 @@ public class BST<E extends Comparable<E>> {
 
     // 返回删除了最小值节点的之后的树的根节点
     private Node removeMin(Node node) {
-        if (node == null) {
+        if (node.left == null) {
             Node right = node.right;
             node.right = null;
 
