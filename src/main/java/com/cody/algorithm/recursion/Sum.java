@@ -1,4 +1,4 @@
-package main.java.com.cody.algorithm.recursion;
+package com.cody.algorithm.recursion;
 
 /**
  * 使用递归求解1到100的和

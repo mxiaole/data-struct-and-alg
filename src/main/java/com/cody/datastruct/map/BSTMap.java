@@ -1,4 +1,4 @@
-package main.java.com.cody.datastruct.map;
+package com.cody.datastruct.map;
 
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     private class Node {

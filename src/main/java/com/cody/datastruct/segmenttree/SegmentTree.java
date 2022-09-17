@@ -1,4 +1,4 @@
-package main.java.com.cody.datastruct.segmenttree;
+package com.cody.datastruct.segmenttree;
 
 /**
  * 线段树

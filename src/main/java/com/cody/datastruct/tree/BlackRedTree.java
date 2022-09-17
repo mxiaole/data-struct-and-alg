@@ -1,4 +1,4 @@
-package main.java.com.cody.datastruct.tree;
+package com.cody.datastruct.tree;
 
 // 红黑树实现
 public class BlackRedTree<K extends Comparable<K>, V> {

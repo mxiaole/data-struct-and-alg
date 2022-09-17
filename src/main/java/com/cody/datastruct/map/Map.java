@@ -1,4 +1,4 @@
-package main.java.com.cody.datastruct.map;
+package com.cody.datastruct.map;
 
 public interface Map<K, V> {
     void add(K key, V value);

@@ -1,4 +1,4 @@
-package main.java.com.cody.datastruct.linklist;
+package com.cody.datastruct.linklist;
 
 /**
  * 链表数据结构
